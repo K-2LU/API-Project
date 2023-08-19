@@ -122,21 +122,6 @@ router.post('/user/checkBalance', async (req, res) => {
 });
 
 // seller login
-router.post('/seller/login', async (req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
-
-    let query = "SELECT * FROM seller WHERE username = ? AND pass = ?";
-    let values = [username, password];
-
-    var result = await getFromServer(query, values);
-    
-    if(result.length == 0) {
-        res.send('check seller credentials');
-    } else {
-        res.send(result);
-    }
-});
 
 // get products of a seller
 router.post('/seller/getProducts', async (req, res) => {
@@ -154,56 +139,12 @@ router.post('/seller/getProducts', async (req, res) => {
 });
 
 // seller all order details
-router.post('/seller/orderDetails', async (req, res) => {
-    let sid = req.body.s_id;
 
-    let query = "SELECT * FROM eorder WHERE s_id = ?"
-    let values = [sid];
-
-    var result = await getFromServer(query, values);
-    if(result.length === 0){
-        res.send('no orders');
-    }else {
-        res.send(result);
-    }
-});
 
 // seller order delivered
-router.post('/seller/orderDelivered', async (req, res) => {
-    let oid = req.body.id;
 
-    let sendQuery = "SELECT * FROM eorder WHERE id = ?"
-    let sendValues = [oid];
-
-    let query = "UPDATE eorder SET state = 1 WHERE id = ?";
-    let values = [oid];
-
-    try {
-
-        var result = await getFromServer(query, values);
-        res.send("delivery success");
-
-        // result = await getFromServer(sendQuery, sendValues);
-
-    }   catch(error) {
-        res.send('server error, try again later');
-    }
-});
 
 // seller order cancelled
-router.post('/seller/orderDelivered', async (req, res) => {
-    let oid = req.body.id;
-
-    let query = "UPDATE eorder SET state = 2 WHERE id = ?";
-    let values = [oid];
-
-    try {
-        var result = await getFromServer(query, values);
-        res.send("cancellation success");
-    }   catch(error) {
-        res.send('server error, try again later');
-    }
-});
 
 // make order
 router.post('/order/make', (req, res) => {

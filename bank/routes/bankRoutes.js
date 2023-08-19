@@ -83,7 +83,6 @@ router.post('/transaction', async (req, res) => {
     const from = req.body.from;
     const to = req.body.to;
     const amount = req.body.amount;
-    const time = req.body.time;
 
     let query = "update accounts set balance = balance - ? where accNo = ?;";
     try {
