@@ -51,9 +51,11 @@ const getFromServer = (query, value) => {
 
 // login
 router.post('/user/login', async(req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     let username = req.body.username;
     let password = req.body.password;
+
+    console.log(username, password);
 
     let query = "SELECT * FROM ecomm_user WHERE username = ? AND pass = ?";
     let values = [username, password];
@@ -62,10 +64,29 @@ router.post('/user/login', async(req, res) => {
 
     console.log(result);
     if(result.length == 0) {
-        res.send('check user credentials');
+        console.log("user not found");
+        res.send({data: 'failed'});
     } else {
-        res.send(result);
+        console.log("user logged in");
+        res.send({
+            username: result[0].username,
+            name: result[0].name,
+            bank_stat: result[0].bank_stat,
+            data: 'success'
+        });
     }
+});
+
+// get user info
+router.post('/user/getInfo', async(req, res) => {
+    const username = req.body.username;
+    // const id = req.body.id;
+
+    let query = "SELECT * FROM ecomm_user WHERE username = ?";
+    let values = [username];
+
+    var result = await getFromServer(query, values);
+    res.send(result[0]);
 });
 
 // create user
@@ -83,29 +104,37 @@ router.post('/user/create', async(req, res) => {
     var result = await getFromServer(query, values);
 
     console.log(result);
+    console.log('leaving log in');
     res.send(result);
 });
 
 // add bank account
-router.post('/user/bankAdd', async(req, res) => {
-    let bankAcc = req.body.bank_acc;
+router.post('/user/addBank', async(req, res) => {
+    let bankAcc = req.body.bankAcc;
     let username = req.body.username;
-    let query = "UPDATE ecomm_user SET bank_stat = true, bank_acc = ? WHERE username = ?";
-    let values = [bankAcc, username];
+    let key = req.body.key;
+
+    console.log('inside add bank: ', bankAcc, username, key);
+
+    let query = "UPDATE ecomm_user SET bank_stat = 0, bank_acc = ?, `key` = ? WHERE username = ?";
+    let values = [bankAcc, key, username];
 
     var result = await getFromServer(query, values);
 
-    res.send(result);
+    res.send({message: 'success'});
 });
 
 // get bank account
 router.get('/user/getBankAcc/:id', async (req, res) => {
     let userId = req.params.id;
+    console.log(userId);
     let query = "SELECT bank_acc FROM ecomm_user WHERE username = ?";
     let values = [userId];
 
     var result = await getFromServer(query, values);
-    res.send(result);
+    
+    console.log(JSON.stringify(result));
+    res.json(result);
 });
 
 // check bank balance
@@ -138,21 +167,31 @@ router.post('/seller/getProducts', async (req, res) => {
     }
 });
 
-// seller all order details
+// order list customer
+router.post('/order/list', async (req, res) => {
+    let uid = req.body.username;
 
+    let query = "SELECT * FROM eorder WHERE u_id = ?";
+    let values = [uid];
 
-// seller order delivered
-
-
-// seller order cancelled
+    var result = await getFromServer(query, values);
+    if(result.length === 0){
+        res.send('no orders');
+    }else {
+        console.log(result);
+        res.send(result);
+    }
+});
 
 // make order
 router.post('/order/make', (req, res) => {
-    let userid = req.body.u_id;
+    let userid = req.body.username;
     let price = req.body.price;
-    let sellerid = req.body.s_id;
+    let sellerid = 'S001';
     let status = 0;
 
+    console.log(userid, price, sellerid);
+    
     let orderId = generateRandomString(6);
     // console.log(orderId);
     // res.send(orderId);
@@ -161,7 +200,7 @@ router.post('/order/make', (req, res) => {
     let values = [orderId, userid, price, status, sellerid];
     try{
         var result = getFromServer(query, values);
-        res.send(orderId);
+        res.send({messae: 'success'});
     }   catch(error) {
         res.send(error);
     }
@@ -170,7 +209,7 @@ router.post('/order/make', (req, res) => {
 
 // order details
 router.post('/order/details', async (req, res) => {
-    let oid = req.body.id;
+    let oid = req.body.orderID;
 
     let query = "SELECT * FROM eorder WHERE id = ?";
     let values = [oid];
@@ -181,6 +220,15 @@ router.post('/order/details', async (req, res) => {
     }else {
         res.send(result);
     }
+});
+
+// order update
+router.post('/order/update', async (req, res) => {
+    let query = req.body.query;
+    let values = req.body.values;
+
+    var result = await getFromServer(query, values);
+    res.send(result);
 });
 
 // transaction request

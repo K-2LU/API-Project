@@ -79,7 +79,7 @@ router.get('/account/:id', async (req, res) => {
 });
 
 router.post('/transaction', async (req, res) => {
-    
+    console.log('transaction begin');
     const from = req.body.from;
     const to = req.body.to;
     const amount = req.body.amount;
@@ -117,6 +117,7 @@ router.post('/transaction', async (req, res) => {
         console.log(error);
     }
 
+    console.log('transaction end');
     res.send("transaction successful");
 });
 

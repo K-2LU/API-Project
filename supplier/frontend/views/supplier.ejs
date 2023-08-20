@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daraz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <div class="app">
+        <%- include('header') %>
+        <div class="nahin-content">
+            
+            <!-- sidebar starts -->
+            <div class="sidebar">
+                <div class="info">
+                    <p><%= name %></p>
+                </div>
+
+                <form action="/history" method="post">
+                    <input type="hidden" name="username" value="<%= username %>">
+                    <input type="hidden" name="name" value="<%= name %>">
+                    <button type="submit" class="button" name="history" value="<%= username %>">Show Order History</button>
+                </form>
+            </div>
+            <!-- sidebar ends -->
+
+            <div class="subcontent">
+                <% for(let i=0; i<history.length; i++) {%>
+
+                <div class="history">
+                    <p class="bold">Order ID: <%= history[i].id %></p>
+                    <p>Total Price: <%= history[i].price %></p>
+                    <p>Seller ID: <%= history[i].s_id %></p>
+
+                    <% if (history[i].state == 0) { %>
+                        <p>State: Pending</p>
+                        <form action="/accept" method="post">
+                            <input type="hidden" name="username" value="<%= username %>">
+                            <input type="hidden" name="name" value="<%= name %>">
+                            <button name="order_id" value=<%= history[i].id %>>Accept</button>
+                        </form>
+                        <form action="/cancel" method="post">
+                            <input type="hidden" name="username" value="<%= username %>">
+                            <input type="hidden" name="name" value="<%= name %>">
+                            <button name="order_id" value=<%= history[i].id %>>Cancel</button>
+                        </form>
+                        
+                    <% } else if (history[i].state == 1) { %>
+                        <p>State: Accepted</p>
+                    <% } else if (history[i].state == 2) { %>
+                        <p>State: Rejected</p>
+                    <% } else if (history[i].state == 3) { %>
+                        <p>State: Delivered</p>
+                    <% } %>
+                </div>
+                <%}%>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    <script src="script.js">
+
+
+    </script>
+</body>
+
+</html>
