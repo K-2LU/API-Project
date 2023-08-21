@@ -12,7 +12,6 @@
 
 
     <div class="app">
-        <%- include('header') %>
         <div class="nahin-content">
             
             <!-- sidebar starts -->
@@ -29,38 +28,47 @@
             </div>
             <!-- sidebar ends -->
 
-            <div class="subcontent">
-                <% for(let i=0; i<history.length; i++) {%>
+            <div class="nahin-content">
+                <div class="product-all-history">
+                    <% for(let i=0; i<history.length; i++) {%>
 
-                <div class="history">
-                    <p class="bold">Order ID: <%= history[i].id %></p>
-                    <p>Total Price: <%= history[i].price %></p>
-                    <p>Seller ID: <%= history[i].s_id %></p>
+                        <div class="nahin-content-1">
+                            <div class="order-info">
+                                
+                                <p class="bold">Order ID: <%= history[i].id %></p>
+                                <p>Total Price: <%= history[i].price %></p>
+                                <p>Seller ID: <%= history[i].s_id %></p>
+            
+                            </div>
+                            <div class="order-state">
+                                <% if (history[i].state == 0) { %>
+                                    <p>State: Pending</p>
+                                    <form action="/accept" method="post">
+                                        <input type="hidden" name="username" value="<%= username %>">
+                                        <input type="hidden" name="name" value="<%= name %>">
+                                        <button name="order_id" value=<%= history[i].id %>>Accept</button>
+                                    </form>
+                                    <form action="/cancel" method="post">
+                                        <input type="hidden" name="username" value="<%= username %>">
+                                        <input type="hidden" name="name" value="<%= name %>">
+                                        <button name="order_id" value=<%= history[i].id %>>Cancel</button>
+                                    </form>
+                                    
+                                <% } else if (history[i].state == 1) { %>
+                                    <p>State: Accepted</p>
+                                <% } else if (history[i].state == 2) { %>
+                                    <p>State: Rejected</p>
+                                <% } else if (history[i].state == 3) { %>
+                                    <p>State: Delivered</p>
+                                <% } %>
 
-                    <% if (history[i].state == 0) { %>
-                        <p>State: Pending</p>
-                        <form action="/accept" method="post">
-                            <input type="hidden" name="username" value="<%= username %>">
-                            <input type="hidden" name="name" value="<%= name %>">
-                            <button name="order_id" value=<%= history[i].id %>>Accept</button>
-                        </form>
-                        <form action="/cancel" method="post">
-                            <input type="hidden" name="username" value="<%= username %>">
-                            <input type="hidden" name="name" value="<%= name %>">
-                            <button name="order_id" value=<%= history[i].id %>>Cancel</button>
-                        </form>
-                        
-                    <% } else if (history[i].state == 1) { %>
-                        <p>State: Accepted</p>
-                    <% } else if (history[i].state == 2) { %>
-                        <p>State: Rejected</p>
-                    <% } else if (history[i].state == 3) { %>
-                        <p>State: Delivered</p>
-                    <% } %>
+                            </div>
+                        </div>
+                    <%}%>
+
+
                 </div>
-                <%}%>
-            </div>
-        </div>
+            </div>  
 
         </div>
     </div>

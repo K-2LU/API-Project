@@ -1,112 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daraz</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<%- include('html') %>
 
 <body>
 
 
     <div class="app">
-        <%- include('header') %>
         <div class="nahin-content">
             
             <!-- sidebar starts -->
-            <div class="sidebar">
-                <div class="info">
-                    <p><%= name %></p>
-                </div>
-                <div class="history">
-                    <form action="/history" method="post">
-                        <input type="hidden" name="username" value="<%= username %>">
-                        <input type="hidden" name="name" value="<%= name %>">
-                        <button type="submit" class="button">Show Order History</button>
-                    </form>
-                </div>
-            </div>
+            <%- include('sidebar') %>
             <!-- sidebar ends -->
 
             <!-- subcontent starts -->
             <div class="subcontent">
 
-                <div class="products">
+                <div class="product-all">
+                    <div class="products">
                     
-                    <!-- a product starts -->
-                    <div class="product">
-                        <div class="productimage">
-                            <img src="./img/cat-4.jpg" alt="" height="128px">
+                        <!-- a product starts -->
+                        <div class="product">
+                            <div class="productimage">
+                                <img src="./img/cat-4.jpg" alt="" height="128px">
+                            </div>
+                            <h3>Camera</h3>
+                            <p>Price: $500</p>
+        
+                            <div class="quantity">
+                                <h4>Quantity</h4>
+                                <button class="minus1">-</button>
+                                <span id="number1">0</span>
+                                <button class="plus1">+</button>    
+                            </div>
                         </div>
-                        <h3>Camera</h3>
-                        <p>Price: $500</p>
+                        <!-- a product ends -->
+                        
+                        <!-- a product starts -->
+                        <div class="product">
+                            <div class="productimage">
+                                <img src="./img/mobail.jpg" alt="" height="128px">
+                            </div>
+                            <h3>Mobile</h3>
+                            <p>Price: $300</p>
+        
+                            <div class="quantity">
+                                <h4>Quantity</h4>
+                                <button class="minus2">-</button>
+                                <span id="number2">0</span>
+                                <button class="plus2">+</button>
+                            </div>
+                        </div>
+                        <!-- a product ends -->
+                        
+                        <!-- a product starts -->
+                        <div class="product">
+                            <div class="productimage">
+                                <img src="./img/laptop.jpg" alt="" height="128px">
+                            </div>
+                            <h3>Laptop</h3>
+                            <p>Price: $1000</p>
     
-                        <div class="quantity">
-                            <h4>Quantity</h4>
-                            <button class="minus1">-</button>
-                            <span id="number1">0</span>
-                            <button class="plus1">+</button>    
+                            <div class="quantity">
+                                <h4>Quantity</h4>
+                                <button class="minus3">-</button>
+                                <span id="number3">0</span>
+                                <button class="plus3">+</button>
+                            </div>
                         </div>
+                        <!-- a product ends -->
                     </div>
-                    <!-- a product ends -->
-                    
-                    <!-- a product starts -->
-                    <div class="product">
-                        <div class="productimage">
-                            <img src="./img/mobail.jpg" alt="" height="128px">
-                        </div>
-                        <h3>Mobile</h3>
-                        <p>Price: $300</p>
     
-                        <div class="quantity">
-                            <h4>Quantity</h4>
-                            <button class="minus2">-</button>
-                            <span id="number2">0</span>
-                            <button class="plus2">+</button>
-                        </div>
-                    </div>
-                    <!-- a product ends -->
-                    
-                    <!-- a product starts -->
-                    <div class="product">
-                        <div class="productimage">
-                            <img src="./img/laptop.jpg" alt="" height="128px">
-                        </div>
-                        <h3>Laptop</h3>
-                        <p>Price: $1000</p>
-
-                        <div class="quantity">
-                            <h4>Quantity</h4>
-                            <button class="minus3">-</button>
-                            <span id="number3">0</span>
-                            <button class="plus3">+</button>
-                        </div>
-                        <button class="addtoorder">Add to
-                            order</button>
-                    </div>
-                    <!-- a product ends -->
+                    <button class="addtoorder">Add to
+                        order</button>
                 </div>
-
+                
                 <div class="quantity-all">
                     <form action="/placeOrder" method="post">
-                        <label for="1">Product 1 :</label>
-                        <input id="1" name="quantity-1">
-                    
-                        <label for="1">Product 2 : </label>
-                        <input id="2" name="quantity-2">
-                        <label for="1">Product 3 : </label>
-                        <input id="3" name="quantity-3">
+                        <div class="quantity">
+                            <label for="1">Smartphone :</label>
+                            <input id="1" name="quantity-1">    
+                        </div>
+
+                        <div class="quantity">
+                            <label for="1">Smartphone : </label>
+                            <input id="2" name="quantity-2">
+                        </div>
+                        <div class="quantity">
+                            <label for="1">Smartphone : </label>
+                            <input id="3" name="quantity-3">
+                        </div>
                         <div>
                             <label for="total">Total : </label>
                             <input id="total" name="total">
                         </div>
-                        
-                        <input type="hidden" name="username" value="<%= username %>">
-                        <input type="hidden" name="name" value="<%= name %>">
+                        <div>
 
-                        <button class="confirmorder">Place Order</button>
+                            <input type="hidden" name="username" value="<%= username %>">
+                            <input type="hidden" name="name" value="<%= name %>">
+
+                            <button class="confirmorder">Place Order</button>
+                        </div>
+                        
                     </form>
                 </div>
 

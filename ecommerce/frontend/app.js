@@ -39,6 +39,17 @@ app.post("/login", async(req, res) => {
     }
 });
 
+app.post('/home', async(req, res) => {
+    const username = req.body.username;
+    const name = req.body.name;
+    const bankStat = req.body.bankStat;
+    const bankAcc = req.body.bankAcc;
+
+    console.log(username, name, bankStat, bankAcc);
+
+    res.render("home", {username: username, name: name, bankStat: bankStat, bankAcc: bankAcc});
+});
+
 app.post("/addBank", async(req, res) => {
     const username = req.body.username;
     const name = req.body.name;
@@ -122,6 +133,10 @@ app.post("/pay", async(req, res) => {
 
 app.get("/home", (req, res) => {
     res.render("home");
+});
+
+app.get("/logout", (req, res) =>    {
+    res.render("login");
 });
 
 // place order

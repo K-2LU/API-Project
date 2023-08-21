@@ -50,13 +50,13 @@ app.post("/accept", async(req, res) => {
 
     console.log(order_id);
 
-    var result = await axios.post(`http://localhost:6000/api/supplier/order/accept`, {order_id});
+    var result = await axios.post(`http://localhost:6010/api/supplier/order/accept`, {order_id});
     console.log(result.data);
 
     console.log('inside accept');
 
     var id = result.data;
-    history = await axios.post(`http://localhost:6000/api/supplier/order/all`, {id});
+    history = await axios.post(`http://localhost:6010/api/supplier/order/all`, {id});
     console.log(history.data);
     res.render("supplier", {username: result.data.username, name: name, 
         history: history.data});
@@ -70,14 +70,14 @@ app.post("/cancel", async(req, res) => {
 
     console.log(order_id);
 
-    var result = await axios.post(`http://localhost:6000/api/supplier/order/cancel`, {order_id});
+    var result = await axios.post(`http://localhost:6010/api/supplier/order/cancel`, {order_id});
     console.log(result.data);
     
     // get s_id from result.data
     
 
     var id = result.data;
-    history = await axios.post(`http://localhost:6000/api/supplier/order/all`, {id});
+    history = await axios.post(`http://localhost:6010/api/supplier/order/all`, {id});
     console.log(history.data);
     res.render("supplier", {username: username, name: name, 
         history: history.data});

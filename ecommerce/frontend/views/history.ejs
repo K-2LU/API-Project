@@ -1,65 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daraz</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<%- include('html') %>
 
 <body>
 
 
     <div class="app">
-        <%- include('header') %>
         <div class="nahin-content">
             
             <!-- sidebar starts -->
-            <div class="sidebar">
-                <div class="info">
-                </div>
-
-                <form action="/history" method="post">
-                    <input type="hidden" name="username" value="<%= username %>">
-                    <input type="hidden" name="name" value="<%= name %>">
-                    <button type="submit" class="button" name="history" value="<%= username %>">Show Order History</button>
-                </form>
-            </div>
+            <%- include('sidebar') %>
             <!-- sidebar ends -->
 
-            <div class="subcontent">
+            <div class="product-all-history">
                 <% for(let i=0; i<history.length; i++) {%>
+                
+                <div class="nahin-content-1">
+                    <div class="order-info">
+                        <p class="bold">Order ID: <%= history[i].id %></p>
+                        <p>Total Price: <%= history[i].price %></p>
+                        <p>Seller ID: <%= history[i].s_id %></p>    
 
-                <div class="history">
-                    <p class="bold">Order ID: <%= history[i].id %></p>
-                    <p>Total Price: <%= history[i].price %></p>
-                    <p>Seller ID: <%= history[i].s_id %></p>
+                    </div>
 
-                    <% if (history[i].state == 0) { %>
-                        <p>State: Pending</p>
-                    <% } else if (history[i].state == 1) { %>
-                        <p>State: Accepted</p>
-                    <% } else if (history[i].state == 2) { %>
-                        <p>State: Rejected</p>
-                    <% } else if (history[i].state == 3) { %>
-                        <p>State: Delivered</p>
-                    <% } %>
+                    <div class="order-state">
+                        <% if (history[i].state == 0) { %>
+                            <p>State: Pending</p>
+                        <% } else if (history[i].state == 1) { %>
+                            <p>State: Accepted</p>
+                        <% } else if (history[i].state == 2) { %>
+                            <p>State: Rejected</p>
+                        <% } else if (history[i].state == 3) { %>
+                            <p>State: Delivered</p>
+                        <% } %>
 
-                    <% if(history[i].state == 1) { %>
-                        <div class="confirm">
-                            <form action="/pay" method="post">
-                                <% const orderID = history[i].id %>
-                                <input type="hidden" name="username" value="<%= username %>">
-                                <input type="hidden" name="name" value=<%= name %>>
-                                <input type="text" placeholder="Bank Key" name="key">
-                                <input type="hidden" name="seller_id" value="<%= history[i].s_id %>">
-                                <input type="hidden" name="orderID" value="<%= orderID %>">
-
-                                <button type="submit">Submit</button>
-                            </form>
-                        </div>
-                    <% } %>
+                        <% if(history[i].state == 1) { %>
+                            <div class="confirm">
+                                <form action="/pay" method="post">
+                                    <% const orderID = history[i].id %>
+                                    <input type="hidden" name="username" value="<%= username %>">
+                                    <input type="hidden" name="name" value=<%= name %>>
+                                    <input type="text" placeholder="Bank Key" name="key">
+                                    <input type="hidden" name="seller_id" value="<%= history[i].s_id %>">
+                                    <input type="hidden" name="orderID" value="<%= orderID %>">
+                                    <div class="submit-button">
+                                        <button type="submit" class="book">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        <% } %>
+                    </div>
                 </div>
                 <%}%>
             </div>
