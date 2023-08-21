@@ -1,17 +1,14 @@
 <%- include('html') %>
 
 <body>
-
-
-    <div class="app">
         <div class="nahin-content">
             
-            <!-- sidebar starts -->
-            <%- include('sidebar') %>
-            <!-- sidebar ends -->
+            <%- include('topbar') %>
 
             <div class="product-all-history">
-                <% for(let i=0; i<history.length; i++) {%>
+
+
+                <% if(history != null) for(let i=0; i<history.length; i++) {%>
                 
                 <div class="nahin-content-1">
                     <div class="order-info">
@@ -50,10 +47,13 @@
                     </div>
                 </div>
                 <%}%>
+
+                <% if(history === null) { %>
+                    <p>You haven't made any order yet</p>
+                <% } %>
             </div>
         </div>
 
-        </div>
     </div>
     <script src="script.js">
 

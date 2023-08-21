@@ -39,6 +39,10 @@ app.post("/login", async(req, res) => {
     }
 });
 
+app.post('/logout', (req, res) => {
+    res.render("login");
+});
+
 app.post('/home', async(req, res) => {
     const username = req.body.username;
     const name = req.body.name;
@@ -81,8 +85,12 @@ app.post("/history", async(req, res) => {
 
     console.log(result.data);
 
-    res.render("history", {username: username, name: name, history: result.data});
-    
+    if(result.data === 'no orders') {
+    res.render("history", {username: username, name: name, history: null});
+    }
+    else {
+        res.render("history", {username: username, name: name, history: result.data});
+    }
 });
 
 app.post("/pay", async(req, res) => {

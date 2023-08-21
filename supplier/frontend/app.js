@@ -14,7 +14,7 @@ app.listen(5000, function () {
     console.log("Server started on port 5000");
 });
 app.get("/", (req, res) => {
-    res.render("login");
+    res.render("login", {page_name: 'Order History'});
 });
 
 app.post("/login", async(req, res) => {
@@ -36,11 +36,24 @@ app.post("/login", async(req, res) => {
         history = await axios.post(`http://localhost:6010/api/supplier/order/all`, {id});
         console.log(history.data);
         res.render("supplier", {username: result.data.username, name: result.data.name, 
-            history: history.data});
+            id: result.data.id, history: history.data, page_name: 'Order History'});
     } else {    
         console.log("fail");
         res.redirect("/");
     }
+});
+
+app.post("/home", async(req, res) => {
+    var username = req.body.username;
+    var name = req.body.name;
+    var id = req.body.id;
+
+    console.log(username, name, id);
+
+    var history = await axios.post(`http://localhost:6010/api/supplier/order/all`, {id});
+    console.log(history.data);
+    res.render("supplier", {username: username, name: name, 
+        id: id, history: history.data, page_name: 'Order History'});
 });
 
 app.post("/accept", async(req, res) => {
@@ -59,7 +72,7 @@ app.post("/accept", async(req, res) => {
     history = await axios.post(`http://localhost:6010/api/supplier/order/all`, {id});
     console.log(history.data);
     res.render("supplier", {username: result.data.username, name: name, 
-        history: history.data});
+        history: history.data, page_name: 'Order History'});
     // res.render("supplier", {username: username, name: name, history: history});
 });
 
@@ -80,5 +93,5 @@ app.post("/cancel", async(req, res) => {
     history = await axios.post(`http://localhost:6010/api/supplier/order/all`, {id});
     console.log(history.data);
     res.render("supplier", {username: username, name: name, 
-        history: history.data});
+        history: history.data, page_name: 'Order History'});
 });

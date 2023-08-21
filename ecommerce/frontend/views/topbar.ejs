@@ -1,0 +1,35 @@
+
+    <div class="topbar">
+
+        <div class="sub-bar">
+            
+            <div class="shop-name">
+                <h2>IICT SHOP</h2>
+            </div>
+            
+            <div class="topbar-nav">
+                
+                <form action="/home" method="post">
+                    <input type="hidden" name="username" value="<%= username %>">
+                    <input type="hidden" name="name" value="<%= name %>">
+                    <button type="submit" class="history">Dashboard</button>
+                </form>
+            
+                <form action="/history" method="post">
+                    <input type="hidden" name="username" value="<%= username %>">
+                    <input type="hidden" name="name" value="<%= name %>">
+                    <button type="submit" class="history">Orders</button>
+                </form>    
+            </div>
+
+        </div>
+
+        <div class="logout-button">
+            <form action="/logout" method="post">
+                <input type="hidden" name="username" value="<%= username %>">
+                <input type="hidden" name="name" value="<%= name %>">
+                <button type="submit" class="logout">Logout</button>
+            </form>
+        </div>
+    
+    </div>

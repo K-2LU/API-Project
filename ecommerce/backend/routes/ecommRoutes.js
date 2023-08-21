@@ -171,7 +171,7 @@ router.post('/seller/getProducts', async (req, res) => {
 router.post('/order/list', async (req, res) => {
     let uid = req.body.username;
 
-    let query = "SELECT * FROM eorder WHERE u_id = ?";
+    let query = "SELECT * FROM eorder WHERE u_id = ? ORDER BY state DESC";
     let values = [uid];
 
     var result = await getFromServer(query, values);

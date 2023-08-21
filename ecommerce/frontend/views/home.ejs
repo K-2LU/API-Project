@@ -4,12 +4,10 @@
 
 
     <div class="app">
-        <div class="nahin-content">
-            
-            <!-- sidebar starts -->
-            <%- include('sidebar') %>
-            <!-- sidebar ends -->
 
+        <div class="nahin-content">
+            <%- include('topbar') %>
+            
             <!-- subcontent starts -->
             <div class="subcontent">
 
@@ -71,39 +69,61 @@
                     <button class="addtoorder">Add to
                         order</button>
                 </div>
-                
-                <div class="quantity-all">
-                    <form action="/placeOrder" method="post">
-                        <div class="quantity">
-                            <label for="1">Smartphone :</label>
-                            <input id="1" name="quantity-1">    
-                        </div>
 
-                        <div class="quantity">
-                            <label for="1">Smartphone : </label>
-                            <input id="2" name="quantity-2">
-                        </div>
-                        <div class="quantity">
-                            <label for="1">Smartphone : </label>
-                            <input id="3" name="quantity-3">
-                        </div>
-                        <div>
-                            <label for="total">Total : </label>
-                            <input id="total" name="total">
-                        </div>
-                        <div>
+                <div class="added-info">
+                    
+                    <div class="user-info">
+                        <p class="name"><%= name %></p>
+                        <p><%= username %></p>
+                    </div>
 
-                            <input type="hidden" name="username" value="<%= username %>">
-                            <input type="hidden" name="name" value="<%= name %>">
+                    <div class="quantity-all">
+    
+                        <form action="/placeOrder" method="post">
+                            <div class="quantity">
+                                <label for="1">Product 1:</label>
 
-                            <button class="confirmorder">Place Order</button>
-                        </div>
-                        
-                    </form>
+                                <div class="amount">
+                                    <input id="1" name="quantity-1">
+                                </div>    
+                            </div>
+        
+                            <div class="quantity">
+                                <label for="1">Product 2:</label>
+                                <div class="amount">
+                                    <input id="2" name="quantity-2">
+                                </div>    
+                            </div>
+                            <div class="quantity">
+                                <label for="1">Product 3:</label>
+                                <div class="amount">
+                                    <input id="3" name="quantity-3">
+                                </div>
+                            </div>
+
+                            <div class="total-price">
+                                <label for="total">Total : </label>
+                                <input id="total" name="total">
+                            </div>
+                            <div>
+                            
+                                <input type="hidden" name="username" value="<%= username %>">
+                                <input type="hidden" name="name" value="<%= name %>">
+                                <div class="confirmation">
+                                    <button class="confirmorder">Place Order</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+    
+                    </div>
+
                 </div>
 
-            </div>
 
+            </div>
+            
+            
         </div>
 
         </div>
