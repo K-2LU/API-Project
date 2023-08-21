@@ -105,11 +105,11 @@ router.post('/order/details', async (req, res) => {
     }
 });
 
-// seller order delivered
+// seller order accepted
 router.post('/order/accept', async (req, res) => {
     let oid = req.body.order_id;
 
-    let query = "UPDATE eorder SET state = 1 WHERE id = ?";
+    let query = "UPDATE eorder SET state = -1 WHERE id = ?";
     let values = [oid];
 
     try {
@@ -127,28 +127,6 @@ router.post('/order/accept', async (req, res) => {
     }   catch(error) {
         res.send('server error, try again later');
     }
-    
-    // try {
-
-    //     // whose bank account to debit
-    //     var result = await getFromServer(sendQuery, sendValues);
-    //     var data = {
-    //         from: result[0].u_id,
-    //         to: result[0].s_id,
-    //         amount: result[0].price
-    //     };
-    //     console.log(data);
-
-    //     result = await getFromServer(query, values);
-
-    //     result = axios.post('http://localhost:3000/api/bank/transaction', data);
-
-    //     res.send("delivery success");
-
-    // }   catch(error) {
-    //     console.log(error);
-    //     res.send('server error, try again later');
-    // }
 });
 
 // seller order cancelled

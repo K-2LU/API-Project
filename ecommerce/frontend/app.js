@@ -73,8 +73,20 @@ app.post("/addBank", async(req, res) => {
     }
 });
 
-app.get("/history", (req, res) => {
-    res.render("history");
+app.get("/history", async(req, res) => {
+    const username = req.body.username;
+    const name = req.body.name;
+    console.log(username, name);
+    var result = await axios.post(`http://localhost:4000/api/ecomm/order/list`, {username, name});
+
+    console.log(result.data);
+
+    if(result.data === 'no orders') {
+    res.render("history", {username: username, name: name, history: null});
+    }
+    else {
+        res.render("history", {username: username, name: name, history: result.data});
+    }
 });
 
 app.post("/history", async(req, res) => {
@@ -135,6 +147,26 @@ app.post("/pay", async(req, res) => {
 
         console.log(result.data);
 
+        res.render("history", {username: username, name: name, history: result.data});
+    }
+});
+
+app.post("/cancel", async(req, res) => {    
+    const orderID = req.body.orderID;
+    const username = req.body.username;
+    const name = req.body.name;
+    const price = parseInt(req.body.total);
+
+    var result = await axios.post(`http://localhost:4000/api/ecomm/order/cancel`, {orderID});
+
+    var result = await axios.post(`http://localhost:4000/api/ecomm/order/list`, {username, name});
+
+    console.log(result.data);
+
+    if(result.data === 'no orders') {
+    res.render("history", {username: username, name: name, history: null});
+    }
+    else {
         res.render("history", {username: username, name: name, history: result.data});
     }
 });

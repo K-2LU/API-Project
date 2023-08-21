@@ -18,5 +18,14 @@
             </div>
 
         </div>
+        
+
+        <div class="logout-button">
+            <form action="/logout" method="post">
+                <input type="hidden" name="username" value="<%= username %>">
+                <input type="hidden" name="name" value="<%= name %>">
+                <button type="submit" class="logout">Logout</button>
+            </form>
+        </div>
     
     </div>

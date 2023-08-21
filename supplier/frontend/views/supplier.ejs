@@ -37,10 +37,10 @@
                                         <button name="order_id" value=<%= history[i].id %>>Cancel</button>
                                     </form>
                                     
-                                <% } else if (history[i].state == 1) { %>
+                                <% } else if (history[i].state == -1) { %>
                                     <p>State: Accepted</p>
                                 <% } else if (history[i].state == 2) { %>
-                                    <p>State: Rejected</p>
+                                    <p>State: Cancelled</p>
                                 <% } else if (history[i].state == 3) { %>
                                     <p>State: Delivered</p>
                                 <% } %>

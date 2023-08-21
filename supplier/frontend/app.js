@@ -43,6 +43,10 @@ app.post("/login", async(req, res) => {
     }
 });
 
+app.post('/logout', (req, res) => {
+    res.render("login", {page_name: 'Log In'});
+});
+
 app.post("/home", async(req, res) => {
     var username = req.body.username;
     var name = req.body.name;
@@ -59,6 +63,7 @@ app.post("/home", async(req, res) => {
 app.post("/accept", async(req, res) => {
     var order_id = req.body.order_id;
     var username = req.body.username;
+    var id = req.body.id;
     var name = req.body.name;
 
     console.log(order_id);
@@ -71,7 +76,7 @@ app.post("/accept", async(req, res) => {
     var id = result.data;
     history = await axios.post(`http://localhost:6010/api/supplier/order/all`, {id});
     console.log(history.data);
-    res.render("supplier", {username: result.data.username, name: name, 
+    res.render("supplier", {username: result.data.username, name: name, id:id, 
         history: history.data, page_name: 'Order History'});
     // res.render("supplier", {username: username, name: name, history: history});
 });
@@ -85,13 +90,10 @@ app.post("/cancel", async(req, res) => {
 
     var result = await axios.post(`http://localhost:6010/api/supplier/order/cancel`, {order_id});
     console.log(result.data);
-    
-    // get s_id from result.data
-    
 
     var id = result.data;
     history = await axios.post(`http://localhost:6010/api/supplier/order/all`, {id});
     console.log(history.data);
-    res.render("supplier", {username: username, name: name, 
+    res.render("supplier", {username: username, name: name, id: id, 
         history: history.data, page_name: 'Order History'});
 });

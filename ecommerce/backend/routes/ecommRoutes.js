@@ -171,7 +171,7 @@ router.post('/seller/getProducts', async (req, res) => {
 router.post('/order/list', async (req, res) => {
     let uid = req.body.username;
 
-    let query = "SELECT * FROM eorder WHERE u_id = ? ORDER BY state DESC";
+    let query = "SELECT * FROM eorder WHERE u_id = ? ORDER BY state ASC";
     let values = [uid];
 
     var result = await getFromServer(query, values);
@@ -226,6 +226,17 @@ router.post('/order/details', async (req, res) => {
 router.post('/order/update', async (req, res) => {
     let query = req.body.query;
     let values = req.body.values;
+
+    var result = await getFromServer(query, values);
+    res.send(result);
+});
+
+// order cancel
+router.post('/order/cancel', async (req, res) => {
+    let oid = req.body.orderID;
+
+    var query = "UPDATE eorder SET state = 2 WHERE id = ?";
+    var values = [oid];
 
     var result = await getFromServer(query, values);
     res.send(result);

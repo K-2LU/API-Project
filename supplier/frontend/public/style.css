@@ -1,6 +1,6 @@
 body    {
     background-color: #fff;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'DM Sans', Helvetica, sans-serif;
 }
 .super-content  {
     display: flex;
@@ -50,8 +50,6 @@ body    {
     gap: 1rem;
 
     margin-top: 1rem;
-
-    /* border: 2px solid red; */
 }
 
 
@@ -70,6 +68,7 @@ body    {
     border-bottom: 5px solid #ffc400;
 }
 
+
 .topbar .logout-button .logout{
     border: none;
     /* background-color: white; */
@@ -77,9 +76,15 @@ body    {
     font-size: 1.22rem;
     color: #fff;
 
+    margin-top: 1rem;
     border-bottom: 5px solid #464646;
 
     transition: transform ease 0.5s, border-bottom ease 0.5s;
+}
+
+.topbar .logout-button .logout:hover{
+    transform: translatey(-7px);
+    border-bottom: 5px solid #ff0000;
 }
 
 .content    {
@@ -530,4 +535,36 @@ button[type="submit"] {
     /* transform: translateY(-05px); */
     /* box-shadow: 0px 0px 10px 0px #626262; */
     background-image: linear-gradient(to bottom, #0fc07c, #0b9e65);
+  }
+
+  .order-state .cancel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid red; */
+  }
+
+  .order-state .cancel .cancel-button {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid red; */
+    height: 2rem;
+    max-width: 100%;
+
+    font-size: 1.25rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+    border-radius: 1rem;
+    border: 2px solid #ebebeb;
+    background-image: transparent;
+    transition: background-color ease 0.5s;
+
+    margin-top: 0.5rem;
+  }
+  .cancel-button:hover {
+    /* transform: translateY(-05px); */
+    /* box-shadow: 0px 0px 10px 0px #626262; */
+    background-color: #ebebeb;
   }

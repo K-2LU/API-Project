@@ -21,15 +21,27 @@
                     <div class="order-state">
                         <% if (history[i].state == 0) { %>
                             <p>State: Pending</p>
-                        <% } else if (history[i].state == 1) { %>
+                            <div class="Cancel">
+                                <form action="/cancel" method="post">
+                                    <% const orderID = history[i].id %>
+                                    <input type="hidden" name="username" value="<%= username %>">
+                                    <input type="hidden" name="name" value=<%= name %>>
+                                    <input type="hidden" name="seller_id" value="<%= history[i].s_id %>">
+                                    <input type="hidden" name="orderID" value="<%= orderID %>">
+                                    <div class="cancel-button">
+                                        <button type="submit" class="book">Cancel Order</button>
+                                    </div>
+                                </form>
+                            </div>
+                        <% } else if (history[i].state == -1) { %>
                             <p>State: Accepted</p>
                         <% } else if (history[i].state == 2) { %>
-                            <p>State: Rejected</p>
+                            <p>State: Cancelled</p>
                         <% } else if (history[i].state == 3) { %>
                             <p>State: Delivered</p>
                         <% } %>
 
-                        <% if(history[i].state == 1) { %>
+                        <% if(history[i].state == -1) { %>
                             <div class="confirm">
                                 <form action="/pay" method="post">
                                     <% const orderID = history[i].id %>
@@ -40,6 +52,17 @@
                                     <input type="hidden" name="orderID" value="<%= orderID %>">
                                     <div class="submit-button">
                                         <button type="submit" class="book">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="Cancel">
+                                <form action="/cancel" method="post">
+                                    <input type="hidden" name="username" value="<%= username %>">
+                                    <input type="hidden" name="name" value=<%= name %>>
+                                    <input type="hidden" name="seller_id" value="<%= history[i].s_id %>">
+                                    <input type="hidden" name="orderID" value="<%= orderID %>">
+                                    <div class="cancel-button">
+                                        <button type="submit" class="book">Cancel Order</button>
                                     </div>
                                 </form>
                             </div>
