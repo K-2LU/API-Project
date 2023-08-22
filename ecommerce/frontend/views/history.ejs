@@ -6,8 +6,7 @@
             <%- include('topbar') %>
 
             <div class="product-all-history">
-
-
+                
                 <% if(history != null) for(let i=0; i<history.length; i++) {%>
                 
                 <div class="nahin-content-1">
@@ -56,6 +55,8 @@
                                 </form>
                             </div>
                             <div class="Cancel">
+
+                                <%= name %>
                                 <form action="/cancel" method="post">
                                     <input type="hidden" name="username" value="<%= username %>">
                                     <input type="hidden" name="name" value=<%= name %>>

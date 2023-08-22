@@ -146,8 +146,10 @@ app.post("/pay", async(req, res) => {
         var result = await axios.post(`http://localhost:4000/api/ecomm/order/list`, {username, name});
 
         console.log(result.data);
+        var temp = await axios.post(`http://localhost:4000/api/ecomm/user/getInfo`, {username});
+        console.log(temp.data);
 
-        res.render("history", {username: username, name: name, history: result.data});
+        res.render("history", {username: username, name: temp.data.name, history: result.data});
     }
 });
 
@@ -157,17 +159,20 @@ app.post("/cancel", async(req, res) => {
     const name = req.body.name;
     const price = parseInt(req.body.total);
 
+    console.log('order cancel :', orderID, username, name, price);  
     var result = await axios.post(`http://localhost:4000/api/ecomm/order/cancel`, {orderID});
 
     var result = await axios.post(`http://localhost:4000/api/ecomm/order/list`, {username, name});
-
     console.log(result.data);
+    
+    var temp = await axios.post(`http://localhost:4000/api/ecomm/user/getInfo`, {username});
+    console.log(temp.data);
 
     if(result.data === 'no orders') {
-    res.render("history", {username: username, name: name, history: null});
+    res.render("history", {username: username, name: temp.data.name, history: null});
     }
     else {
-        res.render("history", {username: username, name: name, history: result.data});
+        res.render("history", {username: username, name: temp.data.name, history: result.data});
     }
 });
 
