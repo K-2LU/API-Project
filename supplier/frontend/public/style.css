@@ -518,7 +518,7 @@ button[type="submit"] {
     justify-content: space-between;
     align-items: center;
 
-    width: 30%;
+    width: max-content;
 
     font-family: 'Poppins';
     font-weight: bolder;
@@ -566,6 +566,31 @@ button[type="submit"] {
     background-image: linear-gradient(to bottom, #0fc07c, #0b9e65);
   }
 
+  .order-state button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: max-content;
+    width: max-content;
+    
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+  }
+  .order-state button:hover {
+    /* transform: translateY(-05px); */
+    /* box-shadow: 0px 0px 10px 0px #626262; */
+    background-color: #2c2c2c;
+  }
   .order-state .cancel {
     display: flex;
     flex-direction: row;
