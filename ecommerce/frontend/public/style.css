@@ -425,7 +425,7 @@ input   {
     justify-content: space-evenly;
     align-items: center;
     
-    /* padding-left: 1.5rem; */
+    padding-left: 1.5rem;
     width: 90%;
     /* border: 1px solid green; */
 }
@@ -466,6 +466,71 @@ input   {
     transform: translateY(-05px);
     box-shadow: 2px 2px 2px 0px #818181;
 }
+
+ .plus1 {
+    border-radius: 0.25rem;
+    background-color: #000;
+    border: none;
+    color: #facd17;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.plus2 {
+    border-radius: 0.25rem;
+    background-color: #000;
+    border: none;
+    color: #facd17;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.plus3 {
+    border-radius: 0.25rem;
+    background-color: #000;
+    border: none;
+    color: #facd17;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+
+.minus1 {
+    border-radius: 0.25rem;
+    background-color: #000;
+    border: none;
+    color: #facd17;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.minus2 {
+    border-radius: 0.25rem;
+    background-color: #000;
+    border: none;
+    color: #facd17;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.minus3 {
+    border-radius: 0.25rem;
+    background-color: #000;
+    border: none;
+    color: #facd17;
+    padding: 0.5rem;
+    font-weight: bold;
+
+    transition: background-color ease 2s,
+                color ease 2s;
+}
+
+.plus1:hover, .plus2:hover, .plus3:hover,
+.minus1:hover, .minus2:hover, .minus3:hover {
+    background-color: #facd17;
+    color: #000;
+}
+
 
 button[type="submit"] {
     width: 100%;
