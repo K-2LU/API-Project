@@ -23,7 +23,12 @@
         <div class="login-container">
             <img src="./img/logo.png" alt="" height="75px">
 
-            <form action="/login" method="post">
+            <form action="/register" method="post">
+
+                <div class="input-box">
+                    <div class="labelInfo">Name: </div>
+                    <input type="text" id="identity" placeholder="Name: " name="name" required>
+                </div>
 
                 <div class="input-box">
                     <div class="labelInfo">Username: </div>
@@ -35,13 +40,15 @@
                     <input type="password" id="password" placeholder="Password" name="password" required>
                 </div>
                 <div class="login-button">
-                    <button type="submit">Login</button>
+                    <button type="submit">Register</button>
                 </div>
 
             </form>
             
             <div class="register-button">
-                <a href="/register" class="book">Register</a>
+                <a href="/" class="book">Already have an account?
+                    <br>Log in
+                </a>
             </div>
         </div>
 

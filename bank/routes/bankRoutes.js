@@ -84,7 +84,18 @@ router.post('/transaction', async (req, res) => {
     const to = req.body.to;
     const amount = req.body.amount;
 
-    let query = "update accounts set balance = balance - ? where accNo = ?;";
+    let query = "select * from accounts where accNo = ?";
+    
+
+    var result = await getFromServer(query, from);
+    if(result[0].balance < amount){
+        console.log('insufficient balance');
+
+        res.send('insufficient balance');
+        return;
+    }
+
+    query = "update accounts set balance = balance - ? where accNo = ?;";
     try {
         var result = await getFromServer(query, [amount, from]);
         console.log(result);
@@ -118,7 +129,7 @@ router.post('/transaction', async (req, res) => {
     }
 
     console.log('transaction end');
-    res.send("transaction successful");
+    res.status(200).json({ message: 'transaction successful' });
 });
 
 

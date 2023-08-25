@@ -96,7 +96,7 @@ router.post('/user/create', async(req, res) => {
     let name = req.body.name;
     let username = req.body.username;
     let password = req.body.password;
-    let bank_stat = false;
+    let bank_stat = 1;
 
     let query = "INSERT INTO ecomm_user (name, username, pass, bank_stat) VALUES (?, ?, ?, ?)";
     let values = [name, username, password, bank_stat];

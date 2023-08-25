@@ -1,17 +1,33 @@
 const minus1 = document.querySelector('.minus1')
 const plus1 = document.querySelector('.plus1');
+
 plus1.addEventListener('click', () => document.getElementById("number1").textContent++);
-minus1.addEventListener('click', () => document.getElementById("number1").textContent--);
+minus1.addEventListener('click', () => {
+    if (document.getElementById("number1").textContent != '0')
+        document.getElementById("number1").textContent--;
+});
+
+
 
 const minus2 = document.querySelector('.minus2')
 const plus2 = document.querySelector('.plus2');
+
 plus2.addEventListener('click', () => document.getElementById("number2").textContent++);
-minus2.addEventListener('click', () => document.getElementById("number2").textContent--);
+minus2.addEventListener('click', () => {
+    if (document.getElementById("number2").textContent != '0')
+        document.getElementById("number2").textContent--;
+});
+
+
 
 const minus3 = document.querySelector('.minus3')
 const plus3 = document.querySelector('.plus3');
+
 plus3.addEventListener('click', () => document.getElementById("number3").textContent++);
-minus3.addEventListener('click', () => document.getElementById("number3").textContent--);
+minus3.addEventListener('click', () => {
+    if (document.getElementById("number3").textContent != '0')
+        document.getElementById("number3").textContent--;
+});
 
 const add = document.querySelector(".addtoorder");
 add.addEventListener("click", () => {

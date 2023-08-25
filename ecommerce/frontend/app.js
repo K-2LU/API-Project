@@ -39,6 +39,22 @@ app.post("/login", async(req, res) => {
     }
 });
 
+app.get("/register", (req, res) => {
+    res.render("register");
+});
+
+
+app.post("/register", async(req, res) => {
+    const username = req.body.username;
+    const name = req.body.name;
+    const password = req.body.password;
+
+    var result = await axios.post(`http://localhost:4000/api/ecomm/user/create`, {username, name, password});
+
+    console.log(result.data);
+    res.render("login");
+});
+
 app.post('/logout', (req, res) => {
     res.render("login");
 });
@@ -114,6 +130,9 @@ app.post("/pay", async(req, res) => {
 
     console.log(orderID);
 
+    var temp = await axios.post(`http://localhost:4000/api/ecomm/user/getInfo`, {username});
+    console.log(temp.data);
+
     var result = await axios.post(`http://localhost:4000/api/ecomm/user/getInfo`, {username});
     console.log(result.data);
     const from = result.data.bank_acc;
@@ -134,6 +153,12 @@ app.post("/pay", async(req, res) => {
 
         result = await axios.post('http://localhost:3000/api/bank/transaction', {from, to, amount});
         console.log('bank transaction');
+        console.log(result.data);
+
+        if(result.data  === 'insufficient balance') {
+            res.render('failed', {username: username, name: temp.data.name, orderID: orderID});
+            return;
+        }
         } catch(error) {
             console.log(error);
         }
@@ -145,9 +170,7 @@ app.post("/pay", async(req, res) => {
 
         var result = await axios.post(`http://localhost:4000/api/ecomm/order/list`, {username, name});
 
-        console.log(result.data);
-        var temp = await axios.post(`http://localhost:4000/api/ecomm/user/getInfo`, {username});
-        console.log(temp.data);
+        // console.log(result.data);
 
         res.render("history", {username: username, name: temp.data.name, history: result.data});
     }
